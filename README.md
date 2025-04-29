@@ -156,7 +156,13 @@ Take a look at these configuration files for CI/CD setup:
 - `.github/workflows/releaser.yaml`
 - `.goreleaser.yml`
 
-The Goreleaser workflow can used to automatically build and publish binaries on Github.
+**Note:**  
+The Goreleaser workflow can be used to automatically build and publish binaries on GitHub.  
+Click the **Draft a new release** button to create a new release.  
+Published releases will appear here: [GitHub Releases - go-template](https://github.com/eislab-cps/go-template/releases)
+
+The Docker workflow will automatically build and publish a Docker image on GitHub.  
+See this page: [GitHub Packages - go-template](https://github.com/eislab-cps/go-template/pkgs/container/go-template)
 
 ## Other tips
 - Run `go mod tidy` to clean up and verify dependencies.
