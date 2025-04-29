@@ -26,8 +26,8 @@ coverage:
 	./buildtools/coverage.sh
 	./buildtools/codecov
 
-github_test: 
-	@cd tests/reliability; go test -v --race
+test: 
+	@cd pkg/helloworld; go test -v --race
 
 install:
 	cp ./bin/$(BINARY_NAME) /usr/local/bin
