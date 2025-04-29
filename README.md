@@ -56,8 +56,13 @@ Hello, World!
 make container
 ```
 
-```console
+Or without Makefile: 
+
+```bash
 docker build -t test/helloworld .
+```
+
+```console
 Sending build context to Docker daemon  4.503MB
 Step 1/4 : FROM alpine
  ---> b0c9d60fc5e3
@@ -74,6 +79,10 @@ Successfully built 0d4933ba1303
 Successfully tagged test/helloworld:latest
 ```
 
+```bash
+docker run --rm test/helloworld
+```
+
 ```console
 docker run --rm test/helloworld
 Hello, World!
@@ -81,11 +90,12 @@ time="2025-04-29T19:15:27Z" level=error msg="Error detected" Error="This is an e
 time="2025-04-29T19:15:27Z" level=info msg=Talking... Msg="Hello, World!" OtherMsg="Logging is cool!"
 ```
 
-### Running tests
+### Running Tests
 To run all tests;
 ```bash
 make test 
 ```
+
 Remember to update Makefile if adding more source directories with tests.
 
 To run all tests in a directory:
@@ -143,8 +153,17 @@ Replace each instance of `github.com/eislab-cps/go-template` with your new modul
 4. Update Goreleaser
 Change the `binary` name to `helloworld` in the `.goreleaser.yml` file.
 
-4. Update Dockerfile 
+5. Update Dockerfile 
 Change the `helloworld` in the `Dockerfile` file.
+
+6. Update Makefile
+Change binary name, and container name:
+
+```console
+BINARY_NAME := helloworld
+BUILD_IMAGE ?= test/helloworld
+PUSH_IMAGE ?= test/helloworld:v1.0.0
+```
 
 ## Continuous Integration
 GitHub will automatically run tests (`make test`) when pushing changes to the `main` branch.
@@ -172,4 +191,10 @@ See this page: [GitHub Packages - go-template](https://github.com/eislab-cps/go-
   go mod vendor
   ```
 - Install and use Github Co-pilot! It is very good at generating logging statement.
+- Note that build time and current Github take is injected into the binary. Very useful for debugging to know which version you are using. 
 
+```console
+./bin/helloworld version                                                                                                                                                              21:53:42
+ab76edd
+2025-04-29T19:35:04Z
+```
