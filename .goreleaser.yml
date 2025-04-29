@@ -2,7 +2,7 @@
 builds:
 - 
   main: ./cmd
-  binary: colonies
+  binary: helloworld 
   env:
   - CGO_ENABLED=0
   ldflags:

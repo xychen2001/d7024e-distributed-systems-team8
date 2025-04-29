@@ -51,9 +51,34 @@ Hello, World!
 ```
 
 
-### Build Docker container
+### Build and run Docker container
 ```bash
 make container
+```
+
+```console
+docker build -t test/helloworld .
+Sending build context to Docker daemon  4.503MB
+Step 1/4 : FROM alpine
+ ---> b0c9d60fc5e3
+Step 2/4 : WORKDIR /
+ ---> Using cache
+ ---> 813578363918
+Step 3/4 : COPY ./bin/helloworld /bin
+ ---> 8bf1ce271011
+Step 4/4 : CMD ["helloworld", "talk"]
+ ---> Running in 5dbb96d0225d
+Removing intermediate container 5dbb96d0225d
+ ---> 0d4933ba1303
+Successfully built 0d4933ba1303
+Successfully tagged test/helloworld:latest
+```
+
+```console
+docker run --rm test/helloworld
+Hello, World!
+time="2025-04-29T19:15:27Z" level=error msg="Error detected" Error="This is an error"
+time="2025-04-29T19:15:27Z" level=info msg=Talking... Msg="Hello, World!" OtherMsg="Logging is cool!"
 ```
 
 ### Running tests
@@ -63,7 +88,7 @@ make test
 ```
 Remember to update Makefile if adding more source directories with tests.
 
-To run individual tests:
+To run all tests in a directory:
 ```bash
 cd pkg/helloworld
 go test -v --race
@@ -72,9 +97,15 @@ go test -v --race
 Always use the `--race` flag when running tests to detect race conditions during execution.  
 The `--race` flag enables the Go race detector, helping you catch concurrency issues early during development.
 
+To run individual test:
 ```bash
- cd pkg/helloworld/
-make test 
+cd pkg/helloworld
+go test -v --race -test.run=TestNewHelloWorld
+```
+
+```console
+=== RUN   TestNewHelloWorld
+ERRO[0000] Error detected                                Error="This is an error"
 ```
 
 ## Change the Project Name
@@ -109,7 +140,23 @@ Modify the import paths in the following files:
 
 Replace each instance of `github.com/eislab-cps/go-template` with your new module name.
 
-## Continus 
+4. Update Goreleaser
+Change the `binary` name to `helloworld` in the `.goreleaser.yml` file.
+
+4. Update Dockerfile 
+Change the `helloworld` in the `Dockerfile` file.
+
+## Continuous Integration
+GitHub will automatically run tests (`make test`) when pushing changes to the `main` branch.
+
+Take a look at these configuration files for CI/CD setup:
+
+- `.github/workflows/docker_master.yaml`
+- `.github/workflows/go.yml`
+- `.github/workflows/releaser.yaml`
+- `.goreleaser.yml`
+
+The Goreleaser workflow can used to automatically build and publish binaries on Github.
 
 ## Other tips
 - Run `go mod tidy` to clean up and verify dependencies.
@@ -118,5 +165,5 @@ Replace each instance of `github.com/eislab-cps/go-template` with your new modul
   ```sh
   go mod vendor
   ```
-- Github Co-pilot is very good at generating logging statement.
+- Install and use Github Co-pilot! It is very good at generating logging statement.
 
