@@ -12,7 +12,7 @@ GOLDFLAGS += -X 'main.BuildVersion=$(VERSION)'
 GOLDFLAGS += -X 'main.BuildTime=$(BUILDTIME)'
 
 build:
-	@CGO_ENABLED=0 go build -ldflags="-s -w $(GOLDFLAGS)" -o $(BINARY_NAME) ./cmd/main.go
+	@CGO_ENABLED=0 go build -ldflags="-s -w $(GOLDFLAGS)" -o ./bin/$(BINARY_NAME) ./cmd/main.go
 
 container:
 	docker build -t $(BUILD_IMAGE) .
