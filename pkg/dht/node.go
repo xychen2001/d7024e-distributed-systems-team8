@@ -24,7 +24,7 @@ type Node struct {
 	tr      transport.Transport
 
 	mu      sync.RWMutex
-	contacts []contact // flat LRU, front = most recent
+	rt      *RoutingTable
 
 	rpcs *internal.RPCTrack
 }
@@ -37,6 +37,11 @@ func New(ctx context.Context, cfg Config, tr transport.Transport) *Node {
 	}
 	// Use SHA1 of addr as deterministic NodeID for now
 	n.selfID = id.HashSHA1([]byte(cfg.SelfAddr))
+	// Initialize routing table (K-buckets)
+	if n.cfg.K == 0 {
+		n.cfg.K = 20
+	}
+	n.rt = newRoutingTable(n.selfID, n.cfg.K)
 	tr.SetHandler(n.handle)
 	go tr.Start(ctx)
 	return n

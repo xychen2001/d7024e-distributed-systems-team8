@@ -25,27 +25,7 @@ func (n *Node) handle(m proto.Message, src *net.UDPAddr) {
 func (n *Node) touch(hexID, addr string) {
 	ni, err := id.FromHex(hexID)
 	if err != nil { return }
-	n.mu.Lock()
-	defer n.mu.Unlock()
-	// move-to-front or insert
-	idx := -1
-	for i, c := range n.contacts {
-		if c.addr == addr || c.id == ni {
-			idx = i
-			break
-		}
-	}
-	if idx >= 0 {
-		c := n.contacts[idx]
-		c.lastSeen = time.Now()
-		c.addr = addr
-		n.contacts = append([]contact{c}, append(n.contacts[:idx], n.contacts[idx+1:]...)...)
-	} else {
-		n.contacts = append([]contact{{id: ni, addr: addr, lastSeen: time.Now()}}, n.contacts...)
-		if len(n.contacts) > 2000 { // arbitrary cap
-			n.contacts = n.contacts[:2000]
-		}
-	}
+	n.rt.touch(ni, addr)
 }
 
 func (n *Node) replyPong(req proto.Message, to string) {
