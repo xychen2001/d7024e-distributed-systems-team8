@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/BrandonChongWenJun/D7024e-tutorial/internal/cli"
-	"github.com/BrandonChongWenJun/D7024e-tutorial/pkg/build"
+	"github.com/xychen/d7024e-distributed-systems-team8/internal/cli"
+	"github.com/xychen/d7024e-distributed-systems-team8/pkg/build"
 )
 
 var (
