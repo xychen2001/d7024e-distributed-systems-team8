@@ -1,0 +1,204 @@
+networks:
+  mynetwork:
+    driver: bridge
+services:
+  node1:
+    build: .
+    networks:
+    - mynetwork
+  node2:
+    build: .
+    networks:
+    - mynetwork
+  node3:
+    build: .
+    networks:
+    - mynetwork
+  node4:
+    build: .
+    networks:
+    - mynetwork
+  node5:
+    build: .
+    networks:
+    - mynetwork
+  node6:
+    build: .
+    networks:
+    - mynetwork
+  node7:
+    build: .
+    networks:
+    - mynetwork
+  node8:
+    build: .
+    networks:
+    - mynetwork
+  node9:
+    build: .
+    networks:
+    - mynetwork
+  node10:
+    build: .
+    networks:
+    - mynetwork
+  node11:
+    build: .
+    networks:
+    - mynetwork
+  node12:
+    build: .
+    networks:
+    - mynetwork
+  node13:
+    build: .
+    networks:
+    - mynetwork
+  node14:
+    build: .
+    networks:
+    - mynetwork
+  node15:
+    build: .
+    networks:
+    - mynetwork
+  node16:
+    build: .
+    networks:
+    - mynetwork
+  node17:
+    build: .
+    networks:
+    - mynetwork
+  node18:
+    build: .
+    networks:
+    - mynetwork
+  node19:
+    build: .
+    networks:
+    - mynetwork
+  node20:
+    build: .
+    networks:
+    - mynetwork
+  node21:
+    build: .
+    networks:
+    - mynetwork
+  node22:
+    build: .
+    networks:
+    - mynetwork
+  node23:
+    build: .
+    networks:
+    - mynetwork
+  node24:
+    build: .
+    networks:
+    - mynetwork
+  node25:
+    build: .
+    networks:
+    - mynetwork
+  node26:
+    build: .
+    networks:
+    - mynetwork
+  node27:
+    build: .
+    networks:
+    - mynetwork
+  node28:
+    build: .
+    networks:
+    - mynetwork
+  node29:
+    build: .
+    networks:
+    - mynetwork
+  node30:
+    build: .
+    networks:
+    - mynetwork
+  node31:
+    build: .
+    networks:
+    - mynetwork
+  node32:
+    build: .
+    networks:
+    - mynetwork
+  node33:
+    build: .
+    networks:
+    - mynetwork
+  node34:
+    build: .
+    networks:
+    - mynetwork
+  node35:
+    build: .
+    networks:
+    - mynetwork
+  node36:
+    build: .
+    networks:
+    - mynetwork
+  node37:
+    build: .
+    networks:
+    - mynetwork
+  node38:
+    build: .
+    networks:
+    - mynetwork
+  node39:
+    build: .
+    networks:
+    - mynetwork
+  node40:
+    build: .
+    networks:
+    - mynetwork
+  node41:
+    build: .
+    networks:
+    - mynetwork
+  node42:
+    build: .
+    networks:
+    - mynetwork
+  node43:
+    build: .
+    networks:
+    - mynetwork
+  node44:
+    build: .
+    networks:
+    - mynetwork
+  node45:
+    build: .
+    networks:
+    - mynetwork
+  node46:
+    build: .
+    networks:
+    - mynetwork
+  node47:
+    build: .
+    networks:
+    - mynetwork
+  node48:
+    build: .
+    networks:
+    - mynetwork
+  node49:
+    build: .
+    networks:
+    - mynetwork
+  node50:
+    build: .
+    networks:
+    - mynetwork
