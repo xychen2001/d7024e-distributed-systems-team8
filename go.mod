@@ -3,7 +3,6 @@ module github.com/xychen2001/d7024e-distributed-systems-team8
 go 1.23.5
 
 require (
-	github.com/BrandonChongWenJun/D7024e-tutorial v0.0.0-20250913173149-5e1a337d9f23
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.9.1
 )

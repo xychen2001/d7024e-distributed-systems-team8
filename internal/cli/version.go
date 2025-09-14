@@ -3,7 +3,7 @@ package cli
 import (
 	"fmt"
 
-	"github.com/xychen/d7024e-distributed-systems-team8/pkg/build"
+	"github.com/xychen2001/d7024e-distributed-systems-team8/pkg/build"
 	"github.com/spf13/cobra"
 )
 

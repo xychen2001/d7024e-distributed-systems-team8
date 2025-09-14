@@ -1,7 +1,7 @@
 package cli
 
 import (
-	"github.com/xychen/d7024e-distributed-systems-team8/pkg/helloworld"
+	"github.com/xychen2001/d7024e-distributed-systems-team8/pkg/helloworld"
 	"github.com/spf13/cobra"
 )
 
