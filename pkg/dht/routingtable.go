@@ -1,6 +1,8 @@
 // pkg/dht/routingtable.go
 package dht
 
+const BucketSize = 20
+
 const bucketSize = 20
 
 // RoutingTable definition

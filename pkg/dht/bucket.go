@@ -18,24 +18,29 @@ func newBucket() *bucket {
 	return bucket
 }
 
-// AddContact adds the Contact to the front of the bucket
-// or moves it to the front of the bucket if it already existed
+// AddContact adds a new contact to the bucket.
+// It follows the LRU discipline: if the contact already exists, it's moved to the front.
+// If the bucket is full, the new contact is not added.
 func (bucket *bucket) AddContact(contact Contact) {
 	var element *list.Element
+	// Find the contact in the bucket
 	for e := bucket.list.Front(); e != nil; e = e.Next() {
-		nodeID := e.Value.(Contact).ID
-
-		if (contact).ID.Equals(nodeID) {
+		if (contact).ID.Equals(e.Value.(Contact).ID) {
 			element = e
 		}
 	}
 
-	if element == nil {
+	if element != nil {
+		// If the contact already exists, move it to the front (most recently seen).
+		bucket.list.MoveToFront(element)
+	} else {
+		// If the contact does not exist, add it to the front if there is space.
 		if bucket.list.Len() < bucketSize {
 			bucket.list.PushFront(contact)
+		} else {
+			// TODO: Implement the eviction policy from the sprint plan.
+			// (Ping the least-recently-seen contact and evict on timeout).
 		}
-	} else {
-		bucket.list.MoveToFront(element)
 	}
 }
 
