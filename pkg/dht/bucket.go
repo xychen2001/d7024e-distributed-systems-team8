@@ -21,7 +21,7 @@ func newBucket() *bucket {
 // AddContact adds a new contact to the bucket.
 // It follows the LRU discipline: if the contact already exists, it's moved to the front.
 // If the bucket is full, the new contact is not added.
-func (bucket *bucket) AddContact(contact Contact) {
+func (bucket *bucket) AddContact(contact Contact, rpc RPC) {
 	var element *list.Element
 	// Find the contact in the bucket
 	for e := bucket.list.Front(); e != nil; e = e.Next() {
@@ -38,8 +38,17 @@ func (bucket *bucket) AddContact(contact Contact) {
 		if bucket.list.Len() < bucketSize {
 			bucket.list.PushFront(contact)
 		} else {
-			// TODO: Implement the eviction policy from the sprint plan.
-			// (Ping the least-recently-seen contact and evict on timeout).
+			// If the bucket is full, ping the least-recently-seen contact (at the back).
+			lruContact := bucket.list.Back().Value.(Contact)
+			if err := rpc.Ping(&lruContact); err != nil {
+				// If the ping fails, evict the least-recently-seen contact and add the new one.
+				bucket.list.Remove(bucket.list.Back())
+				bucket.list.PushFront(contact)
+			} else {
+				// If the ping succeeds, move the least-recently-seen contact to the front
+				// and discard the new contact.
+				bucket.list.MoveToFront(bucket.list.Back())
+			}
 		}
 	}
 }

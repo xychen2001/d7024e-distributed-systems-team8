@@ -70,6 +70,10 @@ func (n *Network) handleMessage(data []byte, remote *net.UDPAddr) {
 		return
 	}
 
+	// Add the sender to the routing table.
+	senderContact := dht.NewContact(msg.SenderID, remote.String())
+	n.routingTable.AddContact(senderContact, n)
+
 	// Check if this is a response to a pending RPC
 	n.mutex.RLock()
 	responseChan, isResponse := n.pendingResponses[*msg.RPCID]

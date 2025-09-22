@@ -61,7 +61,7 @@ var startCmd = &cobra.Command{
 				log.Printf("Successfully contacted bootstrap node with ID %s", bootstrapContact.ID)
 
 				// Add the now-known bootstrap contact to the routing table
-				rt.AddContact(bootstrapContact)
+				rt.AddContact(bootstrapContact, net)
 
 				// Perform a lookup for our own ID to populate the routing table.
 				kademlia.LookupContact(me.ID)
